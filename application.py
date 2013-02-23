@@ -12,11 +12,16 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////temp/test.db'
+# determine database location based on environment
+if 'YOUR_ENV_VAR' in os.environ:
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+
 app.config['SECRET_KEY'] = 'something secret'
 app.config.update( DEBUG = True )
 
-# contains functions/helpers form sqlalchemy and sqlalchmey.orm
+# contains functions/helpers form sqlalchemy and sqlalchemy.orm
 db = SQLAlchemy(app)
 
 # migrate database -- doesn't overwrite tables
@@ -32,11 +37,16 @@ class User(db.Model):
     username = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(25), unique=True)
+    phone_number = db.Column(db.String(20), unique=True)
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, phone_number):
+
+        # TODO: figure out how to validate input
+
         self.username = username
         self.email = email
         self.password = password
+        self.phone_number = '+19857188538'
 
     def __repr__(self):
         return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
@@ -48,7 +58,7 @@ class User(db.Model):
 
 @app.route('/')
 def index():
-    return 'Single Stop 123.'
+    return render_template('index.html')
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -82,7 +92,24 @@ def logout():
 def hello_monkey():
     resp = twillio.twiml.Response()
     resp.sms("Hello, Mobile DOG!!!")
-    return str(resp)
+    #return str(resp)
+
+# Delete these later...
+@app.route('/view_student')
+def view_student():
+    return render_template('student.html')
+
+@app.route('/view_help')
+def view_help():
+    return render_template('help.html')
+
+@app.route('/view_register')
+def view_register():
+    return render_template('register.html')
+
+@app.route('/view_new_student')
+def view_new_student():
+    return render_template('new_student.html')
     
 
 #-------------------------------------------------------------------------------
@@ -91,15 +118,12 @@ def hello_monkey():
 
 @app.route('/register_user', methods = ['POST'])
 def add_user():
-    # handle request
 
-    # create user object (user = ...)
+    user = User(request.form['username'], request.form['email'], request.form['password'])
+    db.session.add(user)
+    db.session.commit()
 
-    # add user to database
-
-    # commit changes
-
-    return
+    return redirect(url_for('student'))
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
