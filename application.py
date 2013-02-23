@@ -1,5 +1,7 @@
 import os
 from flask import Flask, request, session, url_for, render_template, redirect
+import twilio.twiml
+from twilio.rest import TwilioRestClient
 
 # quickstart database
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -10,7 +12,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////temp/test.db'
 app.config['SECRET_KEY'] = 'something secret'
 app.config.update( DEBUG = True )
 
@@ -75,6 +77,12 @@ def logout():
     session.pop('logged_in', None)
 
     return redirect(url_for('login'))
+
+@app.route('/SMSResponse')
+def hello_monkey():
+    resp = twillio.twiml.Response()
+    resp.sms("Hello, Mobile DOG!!!")
+    return str(resp)
     
 
 #-------------------------------------------------------------------------------
