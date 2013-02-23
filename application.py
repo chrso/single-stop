@@ -10,11 +10,16 @@ from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+# determine database location based on environment
+if 'YOUR_ENV_VAR' in os.environ:
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+
 app.config['SECRET_KEY'] = 'something secret'
 app.config.update( DEBUG = True )
 
-# contains functions/helpers form sqlalchemy and sqlalchmey.orm
+# contains functions/helpers form sqlalchemy and sqlalchemy.orm
 db = SQLAlchemy(app)
 
 # migrate database -- doesn't overwrite tables
@@ -30,11 +35,16 @@ class User(db.Model):
     username = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(25), unique=True)
+    phone_number = db.Column(db.String(20), unique=True)
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, phone_number):
+
+        # TODO: figure out how to validate input
+
         self.username = username
         self.email = email
         self.password = password
+        self.phone_number = '+19857188538'
 
     def __repr__(self):
         return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
