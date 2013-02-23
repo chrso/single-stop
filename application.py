@@ -1,16 +1,17 @@
 import os
-from flask import Flask
+from flask import Flask, request, session, url_for, render_template, redirect
 
 # quickstart database
 from flask.ext.sqlalchemy import SQLAlchemy
 
 #-------------------------------------------------------------------------------
-# Initialization
+# Configuration
 #-------------------------------------------------------------------------------
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config['SECRET_KEY'] = 'something secret'
 app.config.update( DEBUG = True )
 
 # contains functions/helpers form sqlalchemy and sqlalchmey.orm
@@ -49,27 +50,31 @@ def index():
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
-    error = None
+    # TODO: error messages
 
     if request.method == 'POST':
-        # look up username, if it doesn't exist return error
-        
-        # compare passwords
+        # TODO: check username
+        user = User.query.filter_by(username=request.form['username']).first()
+        if user is not None:
+        # Later: check passwords
+            session['logged_in'] = True
+            return redirect(url_for('student'))
 
-        # if they match
-        session['logged_in'] = True
-        return redirect(url_for('/student')
-
-    # TODO: render_template login page (if GET or login fails)
-    return 'Login Page.'
+    return render_template('login.html')
 
 @app.route('/student', methods = ['GET'])
 def student():
-    if not session.get('logged_in')
-        return redirect(url_for('/login'))
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     
     # TODO: render student template
     return 'Student Page.'
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+
+    return redirect(url_for('login'))
     
 
 #-------------------------------------------------------------------------------
