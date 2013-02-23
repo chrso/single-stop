@@ -46,7 +46,7 @@ class User(db.Model):
 
 @app.route('/')
 def index():
-    return 'Single Stop.'
+    return render_template('index.html')
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -75,6 +75,23 @@ def logout():
     session.pop('logged_in', None)
 
     return redirect(url_for('login'))
+
+# Delete these later...
+@app.route('/view_student')
+def view_student():
+    return render_template('student.html')
+
+@app.route('/view_help')
+def view_help():
+    return render_template('help.html')
+
+@app.route('/view_register')
+def view_register():
+    return render_template('register.html')
+
+@app.route('/view_new_student')
+def view_new_student():
+    return render_template('new_student.html')
     
 
 #-------------------------------------------------------------------------------
@@ -83,15 +100,12 @@ def logout():
 
 @app.route('/register_user', methods = ['POST'])
 def add_user():
-    # handle request
 
-    # create user object (user = ...)
+    user = User(request.form['username'], request.form['email'], request.form['password'])
+    db.session.add(user)
+    db.session.commit()
 
-    # add user to database
-
-    # commit changes
-
-    return
+    return redirect(url_for('student'))
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
