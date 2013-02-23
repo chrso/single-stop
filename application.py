@@ -16,7 +16,7 @@ app.config.update( DEBUG = True )
 # contains functions/helpers form sqlalchemy and sqlalchmey.orm
 db = SQLAlchemy(app)
 
-# TODO: double check what this does
+# migrate database -- doesn't overwrite tables
 db.create_all()
 
 #-------------------------------------------------------------------------------
@@ -36,27 +36,49 @@ class User(db.Model):
         self.password = password
 
     def __repr__(self):
-        return '<User %r>' % self.password
+        return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
 
 
 #-------------------------------------------------------------------------------
 # Controllers
 #-------------------------------------------------------------------------------
 
-# Public
-
 @app.route('/')
 def index():
     return 'Single Stop.'
 
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+    error = None
+
+    if request.method == 'POST':
+        # look up username, if it doesn't exist return error
+        
+        # compare passwords
+
+        # if they match
+        session['logged_in'] = True
+        return redirect(url_for('/student')
+
+    # TODO: render_template login page (if GET or login fails)
+    return 'Login Page.'
+
+@app.route('/student', methods = ['GET'])
+def student():
+    if not session.get('logged_in')
+        return redirect(url_for('/login'))
+    
+    # TODO: render student template
+    return 'Student Page.'
+    
 
 #-------------------------------------------------------------------------------
-# Post Requests
+# Database Changes
 #-------------------------------------------------------------------------------
 
-@app.route('/add_user', methods = ['POST'])
+@app.route('/register_user', methods = ['POST'])
 def add_user():
-    # handle request user
+    # handle request
 
     # create user object (user = ...)
 
