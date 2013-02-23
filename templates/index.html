@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="span16 offset1">
+    <div class="text-center"><h1>Welcome!</h1></div>
+	<div class="span5"><br><br>
+	<h2>New Users:</h2>
+	<b>Please answer these questions to receive an estimate.</b><br><br>
+	How much did you make this year?<br>
+	<input type="text" class="span2"><br>
+	
+	Question<br>
+	<input type="text" class="span2"><br>
+	
+	Question<br>
+	<input type="text" class="span2"><br>
+	
+	Question<br>
+	<input type="text" class="span2"><br>
+	<button type="submit" class="btn">Submit</button>
+
+</div>
+<div class="span4">
+<br><br>
+	<h2>Returning Users:</h2>
+  <b>Please enter your login information.</b><br><br>
+
+    <form class="navbar-form pull-left">
+    <input type="text" class="span2" placeholder="Username"><br>
+	<input type="text" class="span2" placeholder="Password"<br><br><br>
+  <button type="submit" class="btn">Login</button>
+  </div>
+
+  </div>
+</form>
+{% endblock %}

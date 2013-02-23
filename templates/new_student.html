@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="span12 offset1">
+  
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Your Single Stop</a>
+    <ul class="nav">
+    <li><a href="#">Home</a></li>
+      <li class="active"><a href="#">Forms</a></li>
+      <li><a href="#">Appointments</a></li>
+      <li><a href="#">Get Help</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="hero-unit">
+<h2>Forms to complete</h2>
+
+  <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
+  <b>Form A</b><br>
+  Form is available <a href="#">here</a><br>
+ 	Due by 2/30/2013 </p>
+
+  <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
+  <b>Form B</b><br>
+	Form is not available online. We can help you file the proper paperwork in the office.<br>
+
+  You can visit us at Bronx Community College.
+    <button type="submit" class="btn">Make appointment</button><br>
+      Due by 3/2/2013</p>
+</div>
+
+      <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+{% endblock %}
