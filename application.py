@@ -72,7 +72,7 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/student', methods = ['GET'])
+@app.route('/my_student', methods = ['GET'])
 def student():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
@@ -86,23 +86,22 @@ def logout():
 
     return redirect(url_for('login'))
 
-# Delete these later...
-@app.route('/view_student')
-def view_student():
+@app.route('/student/home')
+def student():
     return render_template('student.html')
 
-@app.route('/view_help')
-def view_help():
+@app.route('/student/help')
+def help():
     return render_template('help.html')
 
-@app.route('/view_register')
-def view_register():
-    return render_template('register.html')
+@app.route('/student/forms')
+def forms():
+    return render_template('forms.html')
 
-@app.route('/view_new_student')
-def view_new_student():
-    return render_template('new_student.html')
-    
+@app.route('/register')
+def register():
+    return render_template('register.html')
+   
 
 #-------------------------------------------------------------------------------
 # Database Changes

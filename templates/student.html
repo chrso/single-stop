@@ -6,10 +6,10 @@
   <div class="navbar-inner">
     <a class="brand" href="#">Your Single Stop</a>
     <ul class="nav">
-    <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Forms</a></li>
+    <li class="active"><a href="{{ url_for('student') }}">Home</a></li>
+      <li><a href="{{ url_for('forms') }}">Forms</a></li>
       <li><a href="#">Appointments</a></li>
-      <li><a href="#">Get Help</a></li>
+      <li><a href="{{ url_for('help') }}">Get Help</a></li>
     </ul>
   </div>
 </div>
