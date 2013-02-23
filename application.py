@@ -1,5 +1,7 @@
 import os
 from flask import Flask, request, session, url_for, render_template, redirect
+import twilio.twiml
+from twilio.rest import TwilioRestClient
 
 # quickstart database
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -101,7 +103,17 @@ def forms():
 @app.route('/register')
 def register():
     return render_template('register.html')
-   
+
+
+#
+# SMS
+#
+
+@app.route('/SMSResponse')
+def hello_monkey():
+    resp = twillio.twiml.Response()
+    resp.sms("Hello, Mobile DOG!!!")
+ 
 
 #-------------------------------------------------------------------------------
 # Database Changes
