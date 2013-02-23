@@ -48,7 +48,7 @@ class User(db.Model):
 
 @app.route('/')
 def index():
-    return 'Single Stop.'
+    return 'Single Stop 123.'
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
