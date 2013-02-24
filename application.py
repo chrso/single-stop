@@ -53,7 +53,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(25))
     phone_number = db.Column(db.String(12))
-    wants_texts = db.Columb(db.String(5))
+    wants_texts = db.Column(db.String(10))
 
     def __init__(self, username, email, password, phone_number):
 
