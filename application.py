@@ -2,7 +2,6 @@ import os
 from flask import Flask, request, session, url_for, render_template, redirect
 import twilio.twiml
 from twilio.rest import TwilioRestClient
-import psycopg2
 
 # quickstart database
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -162,8 +161,10 @@ def register_user():
 
     session['logged_in'] = True 
 
+    '''
     num = User.query.filter_by(phone_number=request.form['phone_number']).first()
     new_user_text(num)
+    '''
 
     return redirect(url_for('student'))
 
