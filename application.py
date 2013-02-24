@@ -16,7 +16,7 @@ app = Flask(__name__)
 if 'DATABASE_URL' in os.environ:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////temp/test.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 
 app.config['SECRET_KEY'] = 'something secret'
 app.config.update( DEBUG = True )
