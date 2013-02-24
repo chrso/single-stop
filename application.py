@@ -113,6 +113,7 @@ def register():
 def hello_monkey():
     resp = twilio.twiml.Response()
     resp.sms("Hello, Mobile DOG!!!")
+    return str(resp)
  
 
 #-------------------------------------------------------------------------------
