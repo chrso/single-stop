@@ -16,7 +16,7 @@ app = Flask(__name__)
 if 'DATABASE_URL' in os.environ:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////temp/test.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 
 app.config['SECRET_KEY'] = 'something secret'
 app.config.update( DEBUG = True )
@@ -110,21 +110,33 @@ def forms():
 
     return render_template('forms.html')
 
+@app.route('/student/counseling')
+def counseling():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
+    return render_template('counseling.html')
+
+@app.route('/student/appointment')
+def appointment():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
+    return render_template('appointment.html')
+
+@app.route('/student/about_us')
+def about():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+    
+    return render_template('about.html')
+
 @app.route('/register')
 def register():
     if session.get("logged_in"):
         return redirect(url_for('student'))
 
     return render_template('register.html')
-
-'''
-import subprocess
-@app.route('/add_event')
-def add_event():
-    subprocess.call("php script.php")
-
-    return "Success!"
-'''
 
 #-------------------------------------------------------------------------------
 # SMS Notifications API (via Twilio)
