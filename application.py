@@ -172,6 +172,10 @@ def register():
 
     return render_template('register.html')
 
+@app.route('/response')
+def response():
+    return render_template('response.html')
+
 #-------------------------------------------------------------------------------
 # SMS Notifications API (via Twilio)
 #-------------------------------------------------------------------------------
