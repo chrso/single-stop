@@ -2,7 +2,6 @@ import os
 from flask import Flask, request, session, url_for, render_template, redirect
 import twilio.twiml
 from twilio.rest import TwilioRestClient
-from apscheduler.scheduler import Scheduler
 
 # quickstart database
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -42,7 +41,6 @@ db.create_all(bind = ['singleStopOrg'])
 account_sid = "AC529852db190279bf7ed541ae7340fd4a"
 auth_token = "8953ef895b2a097f71a4e3e7937ced28"
 client = TwilioRestClient(account_sid,auth_token)
-sched = Scheduler()
 
 #-------------------------------------------------------------------------------
 # Models
@@ -223,16 +221,11 @@ def register_user():
 
     session['logged_in'] = True 
 
-    sched.add_interval_job(timed_function, minutes=1)
-
     return redirect(url_for('student'))
 
 def new_user_text(number):
     text = "Thanks for registering with single-stop. We're here to help you succeed. Want to receive periodic text updates? Reply yes or no."
     sendMessage(number,text)
-
-def timed_function():
-    reminder("+19857188538")
 
 def reminder(number):
     text = "hi"
