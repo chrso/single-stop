@@ -115,7 +115,7 @@ def register():
 #
 
 @app.route('/SMSBlast')
-def sendMessage(message):
+def sendMessage():
     message = client.sms.messages.create(body="Jenny please?! i love u",
       to="+19857188538",
       from_="+19857180534")
