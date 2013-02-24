@@ -197,12 +197,14 @@ def hello_monkey():
             else:
                 message = "if you ever want reminders, just send us a yes!"
     
-    if message is None:
+    else:
         message = "sorry, we don't recognize that response..."
+
+    message = "u stink"
 
     resp = twilio.twiml.Response()
     resp.sms(message)
-    return 'you cant see me'
+    return str(resp)
  
 
 #-------------------------------------------------------------------------------
