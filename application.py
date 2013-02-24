@@ -172,7 +172,7 @@ def register():
 
     return render_template('register.html')
 
-@app.route('/response')
+@app.route('student/response')
 def response():
     return render_template('response.html')
 
