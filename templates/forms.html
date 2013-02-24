@@ -31,7 +31,7 @@
 	Form is not available online. We can help you file the proper paperwork in the office.<br>
 
   You can visit us at Bronx Community College.
-    <button onclick="myFunction2()" type="submit" class="btn">Make appointment</button><br>
+    <a href="{{ url_for('appointment') }}" class="btn">Make appointment</a><br><br><br>
       Due by 3/2/2013</p>
 </div>
 
@@ -49,7 +49,7 @@
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button type="submit" class="btn" data-dismiss="modal" aria-hidden="true">Submit</button>
+    <button onClick="setReminder()" type="submit" class="btn" data-dismiss="modal" aria-hidden="true">Submit</button>
   </div>
 </div>
 
