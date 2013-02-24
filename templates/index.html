@@ -2,7 +2,8 @@
 {% block body %}
 
 {% if not session.logged_in %}
-<div class="span12 offset1">
+<div class="container">
+<div class="span12">
 	
 	<div class="navbar">
 	  <div class="navbar-inner">
@@ -11,56 +12,58 @@
 	    </ul>
 	  </div>
 	</div>
+</div>
 
+<div class="row">
 	<div class="span5">
-	<h2>New Users:</h2>
-	<b>Please answer these questions to receive an estimate.</b><br><br>
+  	<h2>New Users:</h2>
+  	<b>Please answer these questions to receive an estimate.</b><br><br>
     <form class="navbar-form pull-left" action="{{ url_for('register') }}">
-	How much did you make this year?<br>
-	<input type="text" class="span2"><br>
-	
-	Question<br>
-	<input type="text" class="span2"><br>
-	
-	Question<br>
-	<input type="text" class="span2"><br>
-	
-	Question<br>
-	<input type="text" class="span2"><br>
-	<button type="submit" class="btn">Submit</button>
+  	How much did you make this year?<br>
+  	<input type="text" class="span2"><br>
+  	
+  	Do you have any children?<br>
+  	<input type="text" class="span2"><br>
+  	
+  	Question<br>
+  	<input type="text" class="span2"><br>
+  	
+  	Question<br>
+  	<input type="text" class="span2"><br>
+  	<button type="submit" class="btn">Submit</button>
     </form>
+  </div>
 
-    </div>
+  <div class="offset2 span5">
+    <h2>Returning Users:</h2>
+    <b>Please enter your login information.</b><br><br>
+    <form class="navbar-form pull-left" action="{{ url_for('login') }}" method="post">
+        <input type="text" class="span2" placeholder="Username" name="username"><br>
+      <input type="text" class="span2" placeholder="Password" name="password"><br><br>
+      <button type="submit" class="btn" value="login">Login</button>
+    </form> 
+  </div>
 
-    <div class="span4">
-        <h2>Returning Users:</h2>
-        <b>Please enter your login information.</b><br><br>
-
-        <form class="navbar-form pull-left" action="{{ url_for('login') }}" method="post">
-            <input type="text" class="span2" placeholder="Username" name="username"><br>
-	        <input type="text" class="span2" placeholder="Password" name="password"><br><br>
-	        <button type="submit" class="btn" value="login">Login</button>
-        </form> 
-
-    </div>
+</div>
 </div>
 
 {% else %}
 
 <div class="container">
 <div class="span12">
-	<div class="navbar">
-	  <div class="navbar-inner">
-	    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
-	    <ul class="nav">
-	    <li class="active"><a href="{{ url_for('student') }}">Home</a></li>
-	      <li><a href="{{ url_for('forms') }}">Forms</a></li>
-	      <li><a href="#">Appointments</a></li>
-	      <li><a href="{{ url_for('help') }}">Get Help</a></li>
-          <li><a href="{{ url_for('logout') }}">Logout</a></li>
-	    </ul>
-	  </div>
-	</div>
+  <div class="navbar">
+    <div class="navbar-inner">
+    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+    <ul class="nav">
+      <li class="active"><a href="{{ url_for('student') }}">Home</a></li>
+      <li><a href="{{ url_for('counseling') }}">Counseling</a></li>
+      <li><a href="{{ url_for('appointment') }}">Appointments</a></li>
+      <li><a href="{{ url_for('help') }}">Get Help</a></li>
+      <li><a href="{{ url_for('about') }}">About Us</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+    </div>
+  </div>
 </div>
 
 </div>
