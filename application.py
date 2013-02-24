@@ -50,12 +50,14 @@ client = TwilioRestClient(account_sid,auth_token);
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(25), unique=True)
-    email = db.Column(db.String(120), unique=True)
+    email = db.Column(db.String(120))
     password = db.Column(db.String(25))
     phone_number = db.Column(db.String(12))
     wants_texts = db.Column(db.String(10))
+    major = db.Column(db.String(25))
+    graduation_year = db.Column(db.String(4))
 
-    def __init__(self, username, email, password, phone_number):
+    def __init__(self, username, email, password, phone_number, major = "", graduation_year = ""):
 
         # TODO: figure out how to validate input
 
@@ -64,10 +66,19 @@ class User(db.Model):
         self.password = password
         self.phone_number = phone_number
         self.wants_texts = 'maybe'
+        self.major = major
+        self.graduation_year = graduation_year
 
     def __repr__(self):
         return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
 
+class Opportunity(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(25))
+    message = db.Column(db.Text(length=250))
+    date_posted = db.Column(db.Time())
+    graduation_year = db.Column(db.String(4))
+    major = db.Column(db.String(25))
 
 #Provide interface to connect with potential Single Stop Org database 
 class Benefit(db.Model):
@@ -97,6 +108,9 @@ class Benefit(db.Model):
 
 @app.route('/')
 def index():
+    if not session.get("logged_in"):
+        return redirect(url_for('home'))
+
     return render_template('index.html')
 
 @app.route('/login', methods = ['GET', 'POST'])
