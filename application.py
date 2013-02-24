@@ -187,18 +187,17 @@ def sendMessage(number,text):
 def hello_monkey():
     from_number = request.values.get('From')
     response = request.values.get('Body')
-    user = User.query.filter_by(phone_number=from_number, username="silly").first()
-    message = "i dont get that one..."
-    if user is not None:
-        if user.wants_texts == 'maybe':
-            if response == 'yes':
-                message = "thanks, you surely wont regret this!"
-                user.wants_texts = response
-                db.session().commit()
-            else:
-                message = "if you ever want reminders, just send us a yes!"
-                user.wants_texts = response
-                db.session().commit()
+    user = User.query.filter_by(phone_number=from_number, username="billy").first()
+    message = "we didn't recognize that response, but we're here to help you!"
+    if user is not None and user.wants_texts == 'maybe':
+        if response == 'yes':
+            message = "thanks, you surely wont regret this!"
+            user.wants_texts = response
+            db.session().commit()
+        else if response == 'no':
+            message = "if you ever want reminders, just send us a yes!"
+            user.wants_text = response
+            db.session().commit()
 
     resp = twilio.twiml.Response()
     resp.sms(message)
