@@ -13,7 +13,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # determine database location based on environment
-if 'YOUR_ENV_VAR' in os.environ:
+if 'DATABASE_URL' in os.environ:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
