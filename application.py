@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, session, url_for, render_template, redirect
+from flask import Flask, request, session, url_for, render_template, redirect, g
 import twilio.twiml
 from twilio.rest import TwilioRestClient
 
@@ -35,12 +35,12 @@ app.config['SQLALCHEMY_BINDS'] = {
 db.create_all(bind = ['singleStopOrg'])
 
 
-
-
 # stuff need by twillio to send messages
 account_sid = "AC529852db190279bf7ed541ae7340fd4a"
 auth_token = "8953ef895b2a097f71a4e3e7937ced28"
 client = TwilioRestClient(account_sid,auth_token)
+
+current_user = None
 
 #-------------------------------------------------------------------------------
 # Models
@@ -74,6 +74,7 @@ class User(db.Model):
     def __repr__(self):
         return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
 
+# to implement in the future
 class Opportunity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(25))
@@ -115,6 +116,7 @@ def index():
 
     return render_template('index.html')
 
+# for more security, user flask-login
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if session.get("logged_in"):
@@ -128,7 +130,9 @@ def login():
         if user is not None:
         # Later: check passwords
             session['logged_in'] = True
-            session['username'] = user.username
+            global current_user
+            current_user = user
+
             return redirect(url_for('student'))
 
     return render_template('login.html')
@@ -136,6 +140,8 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
+    global current_user
+    current_user = None
 
     return redirect(url_for('login'))
 
@@ -145,7 +151,7 @@ def student():
     if not session.get("logged_in"):
         return redirect(url_for('login'))
 
-    return render_template('student.html')
+    return render_template('student.html', user = current_user)
 
 @app.route('/student/help')
 def help():
