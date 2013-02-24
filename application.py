@@ -42,7 +42,9 @@ class User(db.Model):
     username = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(25))
-    phone_number = db.Column(db.String(20))
+    phone_number = db.Column(db.String(12))
+    wants_texts = db.Columb(db.String(5))
+
 
     def __init__(self, username, email, password, phone_number):
 
@@ -52,6 +54,7 @@ class User(db.Model):
         self.email = email
         self.password = password
         self.phone_number = phone_number
+        self.wants_texts = 'maybe'
 
     def __repr__(self):
         return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
@@ -140,8 +143,22 @@ def sendMessage(number,text):
 @app.route('/SMSResponse', methods=['GET', 'POST'])
 def hello_monkey():
     from_number = request.values.get('From')
+    response = request.values.get('Body')
+    user = User.query.filter_by(phone_number=from_number).first()
+    if user is not None:
+        if user.wants_texts == 'maybe':
+            user.wants_texts = response
+            db.session().commit()
+            if response == 'yes':
+                message = "thanks, you surely wont regret this!"
+            else:
+                message = "if you ever want reminders, just send us a yes!"
+    
+    if message is None:
+        message = "sorry, we don't recognize that response..."
+
     resp = twilio.twiml.Response()
-    resp.sms("Thanks for reaching out!")
+    resp.sms(message)
     return 'you cant see me'
  
 
