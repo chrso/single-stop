@@ -4,10 +4,9 @@
 <div class="span12">
   <div class="navbar">
     <div class="navbar-inner">
-    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+    <a class="brand" href="{{ url_for('index') }}" style="color: #6CB446">Your Single Stop</a>
     <ul class="nav">
       <li><a href="{{ url_for('student') }}">Home</a></li>
-      <li><a href="{{ url_for('forms') }}">Forms</a></li>
       <li><a href="{{ url_for('counseling') }}">Counseling</a></li>
       <li><a href="{{ url_for('appointment') }}">Appointments</a></li>
       <li class="active"><a href="{{ url_for('help') }}">Get Help</a></li>
@@ -15,22 +14,23 @@
       <li><a href="{{ url_for('logout') }}">Logout</a></li>
     </ul>
     </div>
- </div>
+  </div>
+</div>
+</div>
 
-
+<div class="container">
 <div class="hero-unit">
-<h2>Questions</h2>
-  Email your comment/question/concern! It will be emailed to your local representative.<br>
-  <button type="submit" class="btn" onClick="location.href='mailto:singlestoptester@gmail.com?subject=Help!'">Email</button><br><br>
-  Call a representative during office hours (Monday - Friday, 9AM-6PM).<br>
-  <button type="submit" class="btn" onClick="location.href='tel:212-220-8195'">Call</button>
+  <h2>Questions?</h2>
+  <div class="well">
+    <p>Email your comment/question/concern! It will be emailed to your local representative.<br>
+    <button type="submit" class="btn" onClick="location.href='mailto:singlestoptester@gmail.com?subject=Help!'"><i class="icon-envelope"></i></button></p>
+  </div>
+  <div class="well">
+   <p>Call a representative during office hours (Monday - Friday, 9AM-6PM).<br>
+    <button type="submit" class="btn" onClick="location.href='tel:212-220-8195'"><i class="icon-headphones"></i></button></p>
+  </div>
 </div>
-
-<script src="http://code.jquery.com/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
  
- 	
-</div>
 </div>
 
 {% endblock %}

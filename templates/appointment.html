@@ -5,10 +5,9 @@
 <div class="span12">
   <div class="navbar">
     <div class="navbar-inner">
-    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+    <a class="brand" href="{{ url_for('index') }}" style="color: #6CB446">Your Single Stop</a>
     <ul class="nav">
       <li><a href="{{ url_for('student') }}">Home</a></li>
-      <li><a href="{{ url_for('forms') }}">Forms</a></li>
       <li><a href="{{ url_for('counseling') }}">Counseling</a></li>
       <li class="active"><a href="{{ url_for('appointment') }}">Appointments</a></li>
       <li><a href="{{ url_for('help') }}">Get Help</a></li>
@@ -17,15 +16,15 @@
     </ul>
     </div>
   </div>
-
-<div class="hero-unit">
-  <h2 style="text-align:center">Make an appointment</h2>
-<iframe src="http://singlestoptester.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:500px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>this.offsetTop)this.scrollIntoView();"></iframe>
-  
+</div>
 </div>
 
-      <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </div>
+<div class="container">
+<div class="hero-unit">
+  <h2 style="text-align:center">Make an appointment</h2>
+  <iframe src="http://singlestoptester.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:500px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>this.offsetTop)this.scrollIntoView();"></iframe>
+</div>
+
+
 </div>
 {% endblock %}
