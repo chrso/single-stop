@@ -179,7 +179,9 @@ def about():
     if not session.get("logged_in"):
         return redirect(url_for('login'))
     
-    return render_template('about.html')
+    locations = "oak flats"
+
+    return render_template('about.html', locations = locations)
 
 @app.route('/register')
 def register():
