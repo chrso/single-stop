@@ -11,6 +11,7 @@
     <link href="{{ url_for('static', filename='css/newcss.css') }}" rel="stylesheet" media="screen">
     <script type="text/javascript">
       var opened=false;
+      var i=0;
  
       function myFunction(){
         popup_window=window.open('http://www.fafsa.ed.gov/');
@@ -23,27 +24,13 @@
 
       function myFunction3() {
         console.log(i);
-        window.open('http://singlestop.herokuapp.com/response');
         if (opened==true)
         {
           window.open('http://singlestop.herokuapp.com/response');
           i++;
         }
       }
-       
-      var i=0;
-       
-      $('#forms').mouseover(function() {
-        Console.log("justsayin");
-        window.open('http://singlestop.herokuapp.com/response');
-        if (opened==true)
-        {
-          window.open('http://singlestop.herokuapp.com/response');
-          i++;
-        }
-      });
-
-  </script>
+    </script>
 
 	  
 
