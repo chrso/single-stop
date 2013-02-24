@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
-  
-<div class="span12 offset1">
+
+<div class="containter"
+<div class="span12">
   <div class="navbar">
     <div class="navbar-inner">
     <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
@@ -16,7 +17,6 @@
     </ul>
     </div>
   </div>
-</div>
 
 <div class="hero-unit">
   <h2 style="text-align:center">Make an appointment</h2>
@@ -27,4 +27,5 @@
       <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </div>
+</div>
 {% endblock %}
