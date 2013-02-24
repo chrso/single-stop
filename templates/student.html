@@ -1,31 +1,29 @@
 {% extends "layout.html" %}
 {% block body %}
-  <div class="span12 offset1">
-  
-<div class="navbar">
-  <div class="navbar-inner">
-    <a class="brand" href="#">Your Single Stop</a>
-    <ul class="nav">
-    <li class="active"><a href="{{ url_for('student') }}">Home</a></li>
-      <li><a href="{{ url_for('forms') }}">Forms</a></li>
-      <li><a href="#">Appointments</a></li>
-      <li><a href="{{ url_for('help') }}">Get Help</a></li>
-    </ul>
-  </div>
-</div>
 
-<div class="hero-unit">
-  <h2>More ways to save</h2>
-  <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
-  <b>Scholarship A</b><br>
-  Information</p>
-    <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
-  <b>Coupon B</b><br>
-  Save at the bookstore with code ABCDE</p>
+<div class="span12 offset1">
   
-</div>
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <a class="brand" href="#">Your Single Stop</a>
+	    <ul class="nav">
+	    <li class="active"><a href="{{ url_for('student') }}">Home</a></li>
+	      <li><a href="{{ url_for('forms') }}">Forms</a></li>
+	      <li><a href="#">Appointments</a></li>
+	      <li><a href="{{ url_for('help') }}">Get Help</a></li>
+	    </ul>
+	  </div>
+	</div>
 
-      <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </div>
+	<div class="hero-unit">
+  		<h2>More ways to save</h2>
+  		<p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
+  		<b>Scholarship A</b><br>
+  		Information</p>
+    	<p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
+  		<b>Coupon B</b><br>
+  		Save at the bookstore with code ABCDE</p>
+  
+	</div>
+</div>
 {% endblock %}

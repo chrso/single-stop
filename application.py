@@ -75,7 +75,7 @@ def login():
     return render_template('login.html')
 
 @app.route('/my_student', methods = ['GET'])
-def student():
+def my_student():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
     
