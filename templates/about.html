@@ -37,12 +37,11 @@
       }
     </script>
 
-	<script type="text/css">
+<!--	<script type="text/css">
 		#map_canvas img{
 		  max-width: none;
 		}
 	</script>
-
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDZ7pRMhpfmrMGBwEuzgH8GQkkbssDKRZE&sensor=false"></script>
 		<script type="text/javascript">
 		  function init_map() {
@@ -130,19 +129,18 @@
 			}).resize();
 		  }
 			</script>
-
   </head>
 
   <body onload="init_map()">
+-->
 	
 	<div class="container">
 	<div class="span12">
 	  <div class="navbar">
 	    <div class="navbar-inner">
-	    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+	    <a class="brand" href="{{ url_for('index') }}" style="color: #6CB446">Your Single Stop</a>
 	    <ul class="nav">
 	      <li><a href="{{ url_for('student') }}">Home</a></li>
-	      <li><a href="{{ url_for('forms') }}">Forms</a></li>
 	      <li><a href="{{ url_for('counseling') }}">Counseling</a></li>
 	      <li><a href="{{ url_for('appointment') }}">Appointments</a></li>
 	      <li class="active"><a href="{{ url_for('help') }}">Get Help</a></li>
@@ -151,22 +149,24 @@
 	    </ul>
 	    </div>
 	 </div>
+</div>
+</div>
+
+<div class="container">	
+	<div class="hero-unit">
+<h2>Where to find us</h2>
+<p>
+199 Chambers Street<br>Room S235<br>(212) 220-8195</p><br>
+
+	<iframe width="750" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=199+Chambers+Street&amp;aq=&amp;sll=40.75636,-73.985624&amp;sspn=0.03914,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=199+Chambers+St,+New+York,+10013&amp;ll=40.717367,-74.012178&amp;spn=0.009791,0.01929&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=199+Chambers+Street&amp;aq=&amp;sll=40.75636,-73.985624&amp;sspn=0.03914,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=199+Chambers+St,+New+York,+10013&amp;ll=40.717367,-74.012178&amp;spn=0.009791,0.01929&amp;t=m&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">View Larger Map</a></small>
 	</div>
-	</div>
-	
-	<div id="hero-unit">
-    <div id="map_canvas"></div>
-	</div>
-	
-	<div id="hero-unit">
-	<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=199+Chambers+Street&amp;aq=&amp;sll=40.75636,-73.985624&amp;sspn=0.03914,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=199+Chambers+St,+New+York,+10013&amp;ll=40.717367,-74.012178&amp;spn=0.009791,0.01929&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=199+Chambers+Street&amp;aq=&amp;sll=40.75636,-73.985624&amp;sspn=0.03914,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=199+Chambers+St,+New+York,+10013&amp;ll=40.717367,-74.012178&amp;spn=0.009791,0.01929&amp;t=m&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">View Larger Map</a></small>
-	</div>
+</div>
 	
 	<div class="container">
   <hr>
   <div class="footer">Single Stop USA &copy; </div>
   </div>
-
+</div>
  
  </body>
 
