@@ -1,96 +1,173 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 }
-      #map_canvas { height: 100% }
-    </style>
-    <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDZ7pRMhpfmrMGBwEuzgH8GQkkbssDKRZE&sensor=true">
-    </script>
+	<head>
+    	<title></title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	
+		<!-- Bootstrap -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/newcss.css') }}" rel="stylesheet" media="screen">
     <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: new google.maps.LatLng(40.714623,-74.006605), // NYC currently
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
-		
-		
-		geocoder = new google.maps.Geocoder();
-    //var loc = {{ locations|tojson|safe }}; //logined student's address
-	
-	var addr = ["199 Chambers Street Room S235",
-		"Bronx Community College Loew Hall, Room 123",
-		"Bunker Hill Community College",
-		"College of Marin",
-		"Contra Costa Community College",
-		"Delgado Comminity College",
-		"Essex County College",
-		"Hostos Community College (CUNY)",
-		"Kingsborough Community College (CUNY)",
-		"LaGuardia Community College (CUNY)",
-		"Miami Dade College – North, Wolfson, and Kendall campuses",
-		"Queensborough Community College (CUNY)",
-		"Westchester Community College"
-	];
-	var univ = ["Borough of Manhattan Community College (CUNY)",
-		"Bronx Community College (CUNY)",
-		"Bunker Hill Community College",
-		"College of Marin",
-		"Contra Costa Community College",
-		"Delgado Comminity College",
-		"Essex County College",
-		"Hostos Community College (CUNY)",
-		"Kingsborough Community College (CUNY)",
-		"LaGuardia Community College (CUNY)",
-		"Miami Dade College – North, Wolfson, and Kendall campuses",
-		"Queensborough Community College (CUNY)",
-		"Westchester Community College"
-	];
-	var phone = ["(212) 220-8195",
-				"(718) 289-5100 ext. 3433 or 5179",
-				"(617) 228-3330",
-				"(415) 457-8811",
-				"(510) 235-7800",
-				"CALL 671-6563",
-				"(973) 877-1856",
-				"(718) 319-7981",
-				"(718) 368-5411",
-				"(718) 482-5135",
-				"(305) 237-0712 ",
-				"(718) 631-6347",
-				"(914) 606-6725"				
-	];
-	var n = 13;
-    for (var i = 0; i < n; i++) {
-  		geocoder.geocode( { 'address': addr[i] }, function(results, status) {
-  		  if (status == google.maps.GeocoderStatus.OK) {			
-  			var mark = new google.maps.Marker({
-  				map: map,
-  				position: results[0].geometry.location,
-				title: univ[i]
-  			});
-  		  } else {
-  			alert("Geocode was not successful for the following reason: " + status);
-  		  }
-  		});
-	}
-		
-		var myLatlng = new google.maps.LatLng(-34.397, 150.644);
-		var marker = new google.maps.Marker({
-			  position: myLatlng,
-			  map: map,
-			  title:"Hello World!"
-		 });
+      var opened=false;
+      var i=0;
+ 
+      function myFunction(){
+        popup_window=window.open('http://www.fafsa.ed.gov/');
+        opened=true;
+      }
+       
+      function myFunction2(){
+        window.open('http://singlestop.herokuapp.com/student/appointment');
+      }
+
+      function myFunction3() {
+        if (opened==true)
+        {
+          $('#myModal').modal('show')
+          i++;
+          opened=false;
+        }
+      }
+
+      function setReminder() {
+
       }
     </script>
+
+	<script type="text/css">
+		#map_canvas img{
+		  max-width: none;
+		}
+	</script>
+
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDZ7pRMhpfmrMGBwEuzgH8GQkkbssDKRZE&sensor=false"></script>
+		<script type="text/javascript">
+		  function init_map() {
+		    var mapOptions = {
+		      center: new google.maps.LatLng(40.755042,-73.975948), // NYC currently
+		      zoom: 11,
+		      mapTypeId: google.maps.MapTypeId.ROADMAP
+		    };
+		    var map = new google.maps.Map(document.getElementById("map_canvas"),
+		        mapOptions);
+
+
+			geocoder = new google.maps.Geocoder();
+		//var loc = {{ locations|tojson|safe }}; //logined student's address
+
+		var addr = ["199 Chambers Street Room S235",
+			"Bronx Community College Loew Hall, Room 123",
+			"Bunker Hill Community College",
+			"College of Marin",
+			"Contra Costa Community College",
+			"Delgado Comminity College",
+			"Essex County College",
+			"Hostos Community College (CUNY)",
+			"Kingsborough Community College (CUNY)",
+			"LaGuardia Community College (CUNY)",
+			"Miami Dade College – North, Wolfson, and Kendall campuses",
+			"Queensborough Community College (CUNY)",
+			"Westchester Community College"
+		];
+		var univ = ["Borough of Manhattan Community College (CUNY)",
+			"Bronx Community College (CUNY)",
+			"Bunker Hill Community College",
+			"College of Marin",
+			"Contra Costa Community College",
+			"Delgado Comminity College",
+			"Essex County College",
+			"Hostos Community College (CUNY)",
+			"Kingsborough Community College (CUNY)",
+			"LaGuardia Community College (CUNY)",
+			"Miami Dade College – North, Wolfson, and Kendall campuses",
+			"Queensborough Community College (CUNY)",
+			"Westchester Community College"
+		];
+		var phone = ["(212) 220-8195",
+					"(718) 289-5100 ext. 3433 or 5179",
+					"(617) 228-3330",
+					"(415) 457-8811",
+					"(510) 235-7800",
+					"CALL 671-6563",
+					"(973) 877-1856",
+					"(718) 319-7981",
+					"(718) 368-5411",
+					"(718) 482-5135",
+					"(305) 237-0712 ",
+					"(718) 631-6347",
+					"(914) 606-6725"				
+		];
+		var n = 13;
+		for (var i = 0; i < n; i++) {
+			geocoder.geocode( { 'address': addr[i] }, function(results, status) {
+			  if (status == google.maps.GeocoderStatus.OK) {			
+				var mark = new google.maps.Marker({
+					map: map,
+					position: results[0].geometry.location,
+					title: univ[i]
+				});
+			  } else {
+				alert("Geocode was not successful for the following reason: " + status);
+			  }
+			});
+		}
+
+			var myLatlng = new google.maps.LatLng(-34.397, 150.644);
+			var marker = new google.maps.Marker({
+				  position: myLatlng,
+				  map: map,
+				  title:"Hello World!"
+			 });
+			
+			$(window).resize(function () {
+			    var h = $(window).height(),
+			        offsetTop = 190; // Calculate the top offset
+
+			    $('#map_canvas').css('height', (h - offsetTop));
+			}).resize();
+		  }
+			</script>
+
   </head>
-  <body onload="initialize()">
-    <div id="map_canvas" style="width:50%; height:100%"></div>
-  </body>
+
+  <body onload="init_map()">
+	
+	<div class="container">
+	<div class="span12">
+	  <div class="navbar">
+	    <div class="navbar-inner">
+	    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+	    <ul class="nav">
+	      <li><a href="{{ url_for('student') }}">Home</a></li>
+	      <li><a href="{{ url_for('forms') }}">Forms</a></li>
+	      <li><a href="{{ url_for('counseling') }}">Counseling</a></li>
+	      <li><a href="{{ url_for('appointment') }}">Appointments</a></li>
+	      <li class="active"><a href="{{ url_for('help') }}">Get Help</a></li>
+	      <li><a href="{{ url_for('about') }}">About Us</a></li>
+	      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+	    </ul>
+	    </div>
+	 </div>
+	</div>
+	</div>
+	
+	<div id="hero-unit">
+    <div id="map_canvas"></div>
+	</div>
+	
+	<div id="hero-unit">
+	<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=199+Chambers+Street&amp;aq=&amp;sll=40.75636,-73.985624&amp;sspn=0.03914,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=199+Chambers+St,+New+York,+10013&amp;ll=40.717367,-74.012178&amp;spn=0.009791,0.01929&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=199+Chambers+Street&amp;aq=&amp;sll=40.75636,-73.985624&amp;sspn=0.03914,0.077162&amp;ie=UTF8&amp;hq=&amp;hnear=199+Chambers+St,+New+York,+10013&amp;ll=40.717367,-74.012178&amp;spn=0.009791,0.01929&amp;t=m&amp;z=14&amp;iwloc=A" style="color:#0000FF;text-align:left">View Larger Map</a></small>
+	</div>
+	
+	<div class="container">
+  <hr>
+  <div class="footer">Single Stop USA &copy; </div>
+  </div>
+
+ 
+ </body>
+
 </html>
