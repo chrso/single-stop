@@ -9,6 +9,29 @@
     <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
     <link href="{{ url_for('static', filename='css/newcss.css') }}" rel="stylesheet" media="screen">
+    <script type="text/javascript">
+      var opened=false;
+ 
+      function myFunction(){
+        popup_window=window.open('http://www.fafsa.ed.gov/');
+        opened=true;
+      }
+       
+      function myFunction2(){
+        window.open({{ url_for('appointment') }});
+      }
+       
+      var i=0;
+       
+      $("div.hero-unit").mouseover(function() {
+        if(i==0 && opened==true)
+        {
+          window.open({{ url_for('response') }});
+          i++;
+        }
+      });
+
+  </script>
 
 	  
 
