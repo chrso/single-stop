@@ -111,10 +111,9 @@ class Benefit(db.Model):
 
 @app.route('/')
 def index():
-    if session.get("logged_in"):
-        return redirect(url_for('student'))
-
-    return render_template('index.html')
+    
+    # a profile page -- PoC we can customize the experience to the user
+    return render_template('index.html', user = current_user)
 
 # for more security, user flask-login
 @app.route('/login', methods = ['GET', 'POST'])
