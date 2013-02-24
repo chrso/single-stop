@@ -188,8 +188,10 @@ def hello_monkey():
     else:
         message = "sorry, we don't recognize that response..."
 
+    message = "u stink"
+
     resp = twilio.twiml.Response()
-    resp.sms("testo")
+    resp.sms(message)
     return str(resp)
  
 
