@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 {% block body %}
-<body>
   
 <div class="span12 offset1">
   <div class="navbar">
-	  <div class="navbar-inner">
-	    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
-	    <ul class="nav">
-	    <li><a href="{{ url_for('student') }}">Home</a></li>
-	      <li><a href="{{ url_for('forms') }}">Forms</a></li>
-	      <li class="active"><a href="{{ url_for('appointment') }}">Appointments</a></li>
-	      <li><a href="{{ url_for('help') }}">Get Help</a></li>
-          <li><a href="{{ url_for('logout') }}">Logout</a></li>
-	    </ul>
-	  </div>
-	</div>
+    <div class="navbar-inner">
+    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+    <ul class="nav">
+      <li><a href="{{ url_for('student') }}">Home</a></li>
+      <li><a href="{{ url_for('forms') }}">Forms</a></li>
+      <li><a href="{{ url_for('counseling') }}">Forms</a></li>
+      <li class="active"><a href="{{ url_for('appointment') }}">Appointments</a></li>
+      <li><a href="{{ url_for('help') }}">Get Help</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+    </div>
+  </div>
 </div>
 
 <div class="hero-unit">
@@ -26,5 +26,4 @@
       <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </div>
-  </body>
 {% endblock %}
