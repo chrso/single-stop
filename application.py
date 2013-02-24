@@ -16,7 +16,7 @@ app = Flask(__name__)
 if 'DATABASE_URL' in os.environ:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////temp/test.db'
 
 app.config['SECRET_KEY'] = 'something secret'
 app.config.update( DEBUG = True )
@@ -51,7 +51,7 @@ class User(db.Model):
         self.username = username
         self.email = email
         self.password = password
-        self.phone_number = '+19857188538'
+        self.phone_number = phone_number
 
     def __repr__(self):
         return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
@@ -132,7 +132,7 @@ def add_event():
 
 def sendMessage(number,text):
     message = client.sms.messages.create(body=text,
-      to="number",
+      to=number,
       from_="+19857180534")
     print message.sid
     return 'you cant see me'
@@ -155,15 +155,15 @@ def register_user():
 
     #TODO: validate input, if not valid, redirect to register page
 
-    user = User(request.form['username'], request.form['email'], request.form['password'], "")
+    user = User(request.form['username'], request.form['email'], request.form['password'], request.form['number'])
     db.session.add(user)
     db.session.commit()
-    num = User.query.filter_by(phone_number=request.form['phone_number']).first()
-    new_user_text(num)
+    num = user.phone_number
+    new_user_text(user.phone_number)
     return redirect(url_for('student'))
 
 def new_user_text(number):
-    text = "Thanks for registering with single-stop. We're here to help you succeed. Would you like to receive periodic text updates? Reply yes or no."
+    text = "Thanks for registering with single-stop. We're here to help you succeed. Want to receive periodic text updates? Reply yes or no."
     sendMessage(number,text)
 
 #-------------------------------------------------------------------------------

@@ -18,10 +18,11 @@
 	    <script src="http://code.jquery.com/jquery.js"></script>
 	    <script src="js/bootstrap.min.js"></script>
 	    <form class="navbar-form pull-left" action="{{ url_for('register_user') }}" method=post>
-	  		<input type="text" class="span2" placeholder="Username" name="username"><br>
+	  	<input type="text" class="span2" placeholder="Username" name="username"><br>
 			<input type="password" class="span2" placeholder="Password" name="password"><br>
 			<input type="password" class="span2" placeholder="Verify Password"><br>
-	        <input type="text" class="span2" placeholder="Email Address" name="email"><br><br>
+	    <input type="email" class="span2" placeholder="Email Address" name="email"><br>
+	    <input type="text" class="span2" placeholder="Phone Number" name="number"><br><br>
 
 		
 	    <button type="submit" class="btn">Register</button>
