@@ -173,24 +173,24 @@ def sendMessage(number,text):
 
 @app.route('/SMSResponse', methods=['GET', 'POST'])
 def hello_monkey():
-    from_number = request.values.get('From')
-    response = request.values.get('Body')
-    user = User.query.filter_by(phone_number=from_number).first()
-    if user is not None:
-        if user.wants_texts == 'maybe':
-            user.wants_texts = response
-            db.session().commit()
-            if response == 'yes':
-                message = "thanks, you surely wont regret this!"
-            else:
-                message = "if you ever want reminders, just send us a yes!"
+    #from_number = request.values.get('From')
+    #response = request.values.get('Body')
+    #user = User.query.filter_by(phone_number=from_number).first()
+    #if user is not None:
+    #    if user.wants_texts == 'maybe':
+    #        user.wants_texts = response
+    #        db.session().commit()
+    #        if response == 'yes':
+    #            message = "thanks, you surely wont regret this!"
+    #        else:
+    #            message = "if you ever want reminders, just send us a yes!"
     
-    else:
-        message = "sorry, we don't recognize that response..."
+    #else:
+    #    message = "sorry, we don't recognize that response..."
 
     resp = twilio.twiml.Response()
     resp.sms("testo")
-    return 'you cant see me'
+    return str(resp)
  
 
 #-------------------------------------------------------------------------------
