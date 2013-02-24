@@ -27,6 +27,16 @@ db = SQLAlchemy(app)
 # migrate database -- doesn't overwrite tables
 db.create_all()
 
+
+#Provide interface to connect with potential Single Stop Org database 
+app.config['SQLALCHEMY_BINDS'] = {
+    'singleStopOrg':      'sqlite:////tmp/some.db'
+}
+db.create_all(bind = ['singleStopOrg'])
+
+
+
+
 # stuff need by twillio to send messages
 account_sid = "AC529852db190279bf7ed541ae7340fd4a"
 auth_token = "8953ef895b2a097f71a4e3e7937ced28"
@@ -55,6 +65,28 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
+
+
+#Provide interface to connect with potential Single Stop Org database 
+class Benefit(db.Model):
+    __bind_key__ = 'singleStopOrg'
+    id = db.Column(db.Integer, primary_key=True)
+    benefitType = db.Column(db.String(20), unique=True)
+    benefitAmount = db.Column(db.String(10), unique=True)
+    school = db.Column(db.String(30), unique=True)
+    location = db.Column(db.String(50), unique=True)        #office location to get the benfit
+    documentName = db.Column(db.String(30), unique=True)    #document needed for the benfit, might not be one
+    
+    def __init__(self, benefitType, benefitAmount, school, location, documentName):
+        self.benefitType = benefitType
+        self.benefitAmount = benefitAmount
+        self.school = school
+        self.location = location
+        self.documentName = documentName
+        
+    def __repr__(self):
+        return '<User {0}, Email {1}>'.format(self.benefitType, self.benefitAmount)
+
 
 
 #-------------------------------------------------------------------------------
