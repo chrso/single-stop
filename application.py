@@ -190,6 +190,7 @@ def hello_monkey():
     user = User.query.filter_by(phone_number=from_number).first()
     message = "i dont get that one..."
     if user is not None:
+        message = "not none"
         if user.wants_texts == 'maybe':
             if response == 'yes':
                 message = "thanks, you surely wont regret this!"
