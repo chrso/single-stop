@@ -109,10 +109,11 @@ def register():
 # SMS
 #
 
-@app.route('/SMSResponse')
+@app.route('/SMSResponse', methods=['GET', 'POST'])
 def hello_monkey():
-    resp = twillio.twiml.Response()
+    resp = twilio.twiml.Response()
     resp.sms("Hello, Mobile DOG!!!")
+    return str(resp)
  
 
 #-------------------------------------------------------------------------------
