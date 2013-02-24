@@ -77,7 +77,7 @@ class User(db.Model):
 class Opportunity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(25))
-    message = db.Column(db.Text(length=250))
+    message = db.Column(db.String(250))
     date_posted = db.Column(db.Time())
     graduation_year = db.Column(db.String(4))
     major = db.Column(db.String(25))
@@ -110,8 +110,8 @@ class Benefit(db.Model):
 
 @app.route('/')
 def index():
-    if not session.get("logged_in"):
-        return redirect(url_for('home'))
+    if session.get("logged_in"):
+        return redirect(url_for('student'))
 
     return render_template('index.html')
 
