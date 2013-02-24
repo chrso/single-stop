@@ -108,8 +108,8 @@ class Benefit(db.Model):
 
 @app.route('/')
 def index():
-    if not session.get("logged_in"):
-        return redirect(url_for('home'))
+    if session.get("logged_in"):
+        return redirect(url_for('student'))
 
     return render_template('index.html')
 
