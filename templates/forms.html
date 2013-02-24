@@ -20,19 +20,20 @@
 <div class="hero-unit" onmouseover="myFunction3();">
 <h2>Forms to complete</h2>
 
-  <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
-  <b>Form A</b><br>
-  Form is available at Fafsa.<br>
-  <button onclick="myFunction()" class="btn">Go to form</button><br>
- 	Due by 2/30/2013 </p>
+  <div class="well">
+    <p><b>Form A</b> - potentially $A<br>
+    Form is available at Fafsa.<br>
+    <button onclick="myFunction()" class="btn">Go to form</button><br>
+   	Due by 2/30/2013 </p>
+  </div>
 
-  <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
-  <b>Form B</b><br>
-	Form is not available online. We can help you file the proper paperwork in the office.<br>
-
-  You can visit us at Bronx Community College.<br>
+  <div class="well">
+    <p><b>Form B</b> - potentially $X<br>
+  	Form is not available online. We can help you file the proper paperwork in the office.<br>
+    You can visit us at Bronx Community College.<br>
     <a href="{{ url_for('appointment') }}" class="btn">Make appointment</a><br>
-      Due by 3/2/2013</p>
+    Due by 3/2/2013</p>
+  </div>
 </div>
 
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
