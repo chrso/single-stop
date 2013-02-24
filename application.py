@@ -40,7 +40,7 @@ db.create_all(bind = ['singleStopOrg'])
 # stuff need by twillio to send messages
 account_sid = "AC529852db190279bf7ed541ae7340fd4a"
 auth_token = "8953ef895b2a097f71a4e3e7937ced28"
-client = TwilioRestClient(account_sid,auth_token);
+client = TwilioRestClient(account_sid,auth_token)
 
 #-------------------------------------------------------------------------------
 # Models
@@ -201,20 +201,17 @@ def sendMessage(number,text):
 def hello_monkey():
     from_number = request.values.get('From')
     response = request.values.get('Body')
-    user = User.query.filter_by(phone_number=from_number).first()
-    if user is not None:
-        if user.wants_texts == 'maybe':
+    user = User.query.filter_by(phone_number=from_number, username="sal").first()
+    message = "we didn't recognize that response, but we're here to help you!"
+    if user is not None and user.wants_texts == 'maybe':
+        if response == 'yes':
+            message = "thanks, you surely wont regret this!"
             user.wants_texts = response
             db.session().commit()
-            if response == 'yes':
-                message = "thanks, you surely wont regret this!"
-            else:
-                message = "if you ever want reminders, just send us a yes!"
-    
-    else:
-        message = "sorry, we don't recognize that response..."
-
-    message = "u stink"
+        elif response == 'no':
+            message = "Ok fine! if you ever want reminders, just send us a yes!"
+            user.wants_text = response
+            db.session().commit()
 
     resp = twilio.twiml.Response()
     resp.sms(message)
@@ -243,6 +240,11 @@ def register_user():
 def new_user_text(number):
     text = "Thanks for registering with single-stop. We're here to help you succeed. Want to receive periodic text updates? Reply yes or no."
     sendMessage(number,text)
+
+def reminder(number):
+    text = "hi"
+    sendMessage(number,text)
+
 
 #-------------------------------------------------------------------------------
 # Launcher
