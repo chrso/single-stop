@@ -194,7 +194,7 @@ def hello_monkey():
             message = "thanks, you surely wont regret this!"
             user.wants_texts = response
             db.session().commit()
-        else if response == 'no':
+        elif response == 'no':
             message = "if you ever want reminders, just send us a yes!"
             user.wants_text = response
             db.session().commit()
