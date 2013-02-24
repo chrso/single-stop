@@ -13,7 +13,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # determine database location based on environment
-if 'YOUR_ENV_VAR' in os.environ:
+if 'DATABASE_URL' in os.environ:
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
@@ -42,7 +42,7 @@ class User(db.Model):
     username = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(25), unique=True)
-    phone_number = db.Column(db.String(20), unique=True)
+    phone_number = db.Column(db.String(20))
 
     def __init__(self, username, email, password, phone_number):
 
@@ -67,6 +67,9 @@ def index():
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+    if session.get("logged_in"):
+        return redirect(url_for('student'))
+
     # TODO: error messages
 
     if request.method == 'POST':
@@ -79,40 +82,53 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/my_student', methods = ['GET'])
-def student():
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-    
-    # TODO: render student template
-    return 'Student Page.'
-
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
 
     return redirect(url_for('login'))
 
+@app.route('/student')
 @app.route('/student/home')
 def student():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
     return render_template('student.html')
 
 @app.route('/student/help')
 def help():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
     return render_template('help.html')
 
 @app.route('/student/forms')
 def forms():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
     return render_template('forms.html')
 
 @app.route('/register')
 def register():
+    if session.get("logged_in"):
+        return redirect(url_for('student'))
+
     return render_template('register.html')
 
+'''
+import subprocess
+@app.route('/add_event')
+def add_event():
+    subprocess.call("php script.php")
 
-#
-# SMS
-#
+    return "Success!"
+'''
+
+#-------------------------------------------------------------------------------
+# SMS Notifications API (via Twilio)
+#-------------------------------------------------------------------------------
 
 def sendMessage(number,text):
     message = client.sms.messages.create(body=text,
@@ -133,9 +149,13 @@ def hello_monkey():
 # Database Changes
 #-------------------------------------------------------------------------------
 
+# can be included in register (potentially)
 @app.route('/register_user', methods = ['POST'])
-def add_user():
-    user = User(request.form['username'], request.form['email'], request.form['password'])
+def register_user():
+
+    #TODO: validate input, if not valid, redirect to register page
+
+    user = User(request.form['username'], request.form['email'], request.form['password'], "")
     db.session.add(user)
     db.session.commit()
     num = User.query.filter_by(phone_number=request.form['phone_number']).first()
@@ -145,6 +165,10 @@ def add_user():
 def new_user_text(number):
     text = "Thanks for registering with single-stop. We're here to help you succeed. Would you like to receive periodic text updates? Reply yes or no."
     sendMessage(number,text)
+
+#-------------------------------------------------------------------------------
+# Launcher
+#-------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
