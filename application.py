@@ -144,21 +144,33 @@ def forms():
 
     return render_template('forms.html')
 
+@app.route('/student/counseling')
+def counseling():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
+    return render_template('counseling.html')
+
+@app.route('/student/appointment')
+def appointment():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
+    return render_template('appointment.html')
+
+@app.route('/student/about_us')
+def about():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+    
+    return render_template('about.html')
+
 @app.route('/register')
 def register():
     if session.get("logged_in"):
         return redirect(url_for('student'))
 
     return render_template('register.html')
-
-'''
-import subprocess
-@app.route('/add_event')
-def add_event():
-    subprocess.call("php script.php")
-
-    return "Success!"
-'''
 
 #-------------------------------------------------------------------------------
 # SMS Notifications API (via Twilio)
