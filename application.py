@@ -75,7 +75,7 @@ class User(db.Model):
 class Opportunity(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(25))
-    message = db.Column(db.Text(length=250))
+    message = db.Column(db.String(250))
     date_posted = db.Column(db.Time())
     graduation_year = db.Column(db.String(4))
     major = db.Column(db.String(25))
