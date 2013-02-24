@@ -41,7 +41,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(25))
+    password = db.Column(db.String(25)) # TODO: add password validation (existence)
     phone_number = db.Column(db.String(20))
 
     def __init__(self, username, email, password, phone_number):
@@ -160,11 +160,6 @@ def register_user():
     db.session.commit()
 
     session['logged_in'] = True 
-
-    '''
-    num = User.query.filter_by(phone_number=request.form['phone_number']).first()
-    new_user_text(num)
-    '''
 
     return redirect(url_for('student'))
 
