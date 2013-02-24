@@ -176,19 +176,17 @@ def hello_monkey():
     from_number = request.values.get('From')
     response = request.values.get('Body')
     user = User.query.filter_by(phone_number=from_number).first()
+    message = "i dont get that one..."
     if user is not None:
         if user.wants_texts == 'maybe':
-            user.wants_texts = response
-            db.session().commit()
             if response == 'yes':
                 message = "thanks, you surely wont regret this!"
+                user.wants_texts = response
+                db.session().commit()
             else:
                 message = "if you ever want reminders, just send us a yes!"
-    
-    else:
-        message = "sorry, we don't recognize that response..."
-
-    message = "u stink"
+                user.wants_texts = response
+                db.session().commit()
 
     resp = twilio.twiml.Response()
     resp.sms(message)
