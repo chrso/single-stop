@@ -24,7 +24,8 @@
 
   <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
   <b>Form A</b><br>
-  Form is available <a href="#">here</a><br>
+  Form is available at Fafsa.<br>
+  <input type="button" value="Go to form" onclick="myFunction()" class="btn"><br>
  	Due by 2/30/2013 </p>
 
   <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
@@ -32,11 +33,34 @@
 	Form is not available online. We can help you file the proper paperwork in the office.<br>
 
   You can visit us at Bronx Community College.
-    <button type="submit" class="btn">Make appointment</button><br>
+    <button onclick="myFunction2()" type="submit" class="btn">Make appointment</button><br>
       Due by 3/2/2013</p>
 </div>
 
       <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+   <script type="text/javascript">
+    	var opened=false;
+ 
+   function myFunction(){
+   popup_window=window.open('http://www.fafsa.ed.gov/');
+	opened=true;
+   }
+   
+   function myFunction2(){
+   window.open({{ url_for('appointment') }});
+   }
+   
+   var i=0;
+   
+  $("div.hero-unit").mouseover(function() {
+  if(i==0 && opened==true)
+  {
+    window.open({{ url_for('response') }});
+    i++;
+    }
+  });
+
+    </script>
   </div>
 {% endblock %}
