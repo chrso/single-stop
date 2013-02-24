@@ -114,19 +114,19 @@ def register():
 # SMS
 #
 
-@app.route('/SMSBlast')
-def sendMessage():
-    message = client.sms.messages.create(body="Jenny please?! i love u",
-      to="+19857188538",
+def sendMessage(number,text):
+    message = client.sms.messages.create(body=text,
+      to="number",
       from_="+19857180534")
     print message.sid
+    return 'you cant see me'
 
 @app.route('/SMSResponse', methods=['GET', 'POST'])
 def hello_monkey():
     from_number = request.values.get('From')
     resp = twilio.twiml.Response()
-    resp.sms("Hello, Mobile DOG!!!")
-    return str(resp)
+    resp.sms("Thanks for reaching out!")
+    return 'you cant see me'
  
 
 #-------------------------------------------------------------------------------
@@ -135,12 +135,16 @@ def hello_monkey():
 
 @app.route('/register_user', methods = ['POST'])
 def add_user():
-
     user = User(request.form['username'], request.form['email'], request.form['password'])
     db.session.add(user)
     db.session.commit()
-
+    num = User.query.filter_by(phone_number=request.form['phone_number']).first()
+    new_user_text(num)
     return redirect(url_for('student'))
+
+def new_user_text(number):
+    text = "Thanks for registering with single-stop. We're here to help you succeed. Would you like to receive periodic text updates? Reply yes or no."
+    sendMessage(number,text)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
