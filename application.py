@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, session, url_for, render_template, redirect
 import twilio.twiml
 from twilio.rest import TwilioRestClient
+from apscheduler.scheduler import Scheduler
 
 # quickstart database
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -40,7 +41,8 @@ db.create_all(bind = ['singleStopOrg'])
 # stuff need by twillio to send messages
 account_sid = "AC529852db190279bf7ed541ae7340fd4a"
 auth_token = "8953ef895b2a097f71a4e3e7937ced28"
-client = TwilioRestClient(account_sid,auth_token);
+client = TwilioRestClient(account_sid,auth_token)
+sched = Scheduler()
 
 #-------------------------------------------------------------------------------
 # Models
@@ -187,7 +189,7 @@ def sendMessage(number,text):
 def hello_monkey():
     from_number = request.values.get('From')
     response = request.values.get('Body')
-    user = User.query.filter_by(phone_number=from_number, username="billy").first()
+    user = User.query.filter_by(phone_number=from_number, username="sal").first()
     message = "we didn't recognize that response, but we're here to help you!"
     if user is not None and user.wants_texts == 'maybe':
         if response == 'yes':
@@ -195,7 +197,7 @@ def hello_monkey():
             user.wants_texts = response
             db.session().commit()
         elif response == 'no':
-            message = "if you ever want reminders, just send us a yes!"
+            message = "Ok fine! if you ever want reminders, just send us a yes!"
             user.wants_text = response
             db.session().commit()
 
@@ -221,11 +223,21 @@ def register_user():
 
     session['logged_in'] = True 
 
+    sched.add_interval_job(timed_function, minutes=1)
+
     return redirect(url_for('student'))
 
 def new_user_text(number):
     text = "Thanks for registering with single-stop. We're here to help you succeed. Want to receive periodic text updates? Reply yes or no."
     sendMessage(number,text)
+
+def timed_function():
+    reminder("+19857188538")
+
+def reminder(number):
+    text = "hi"
+    sendMessage(number,text)
+
 
 #-------------------------------------------------------------------------------
 # Launcher
