@@ -187,7 +187,7 @@ def sendMessage(number,text):
 def hello_monkey():
     from_number = request.values.get('From')
     response = request.values.get('Body')
-    user = User.query.filter_by(phone_number=from_number).last()
+    user = User.query.filter_by(phone_number=from_number).first()
     message = "i dont get that one..."
     if user is not None:
         if user.wants_texts == 'maybe':
