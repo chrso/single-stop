@@ -7,7 +7,6 @@
     <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
     <ul class="nav">
       <li><a href="{{ url_for('student') }}">Home</a></li>
-      <li><a href="{{ url_for('forms') }}">Forms</a></li>
       <li class="active"><a href="{{ url_for('counseling') }}">Counseling</a></li>
       <li><a href="{{ url_for('appointment') }}">Appointments</a></li>
       <li><a href="{{ url_for('help') }}">Get Help</a></li>
@@ -16,21 +15,26 @@
     </ul>
     </div>
   </div>
+</div>
+</div>
+
+<div class="container">
 
 <div class="hero-unit">
-  <h2>Need consulting services?</h2>
-  <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
-  <b>Financial Counseling</b><br>
-  Whether you have poor credit, good credit or no credit, come to Single Stop and speak with the Financial Counselor (FC). The FC will review your credit report, explain everything it outlines, and discuss the actions you need to take to improve weak credit or to build or re-build your credit. The FC will also help you develop a budget, so you can obtain a savings account.<br>
-    <a href="{{ url_for('appointment') }}" class="btn">Make appointment</a><br><br></p>
-    <p style="background-color:#FFFFFF; border: 2px; border-radius: 5px; padding-left: 10px">
-  <b>Legal Counseling</b><br>
-  Attorneys will assist you with issues you may have with your landlord, immigration status, and representation on fair hearing issues for public benefits. Single Stop attorneys will also provide information on free classes for citizenship.<br>
-<a href="{{ url_for('appointment') }}" class="btn">Make appointment</a><br><br></p>
+  <h2>Need consulting services? We offer those too!</h2>
 
+  <div class="well">
+    <p><b>Financial Counseling</b><br>
+    Whether you have poor credit, good credit or no credit, come to Single Stop and speak with the Financial Counselor (FC). The FC will review your credit report, explain everything it outlines, and discuss the actions you need to take to improve weak credit or to build or re-build your credit. The FC will also help you develop a budget, so you can obtain a savings account.<br>
+    <a href="{{ url_for('appointment') }}" class="btn">Make appointment</a></p>
+  </div>
+  <div class="well">
+    <p><b>Legal Counseling</b><br>
+    Attorneys will assist you with issues you may have with your landlord, immigration status, and representation on fair hearing issues for public benefits. Single Stop attorneys will also provide information on free classes for citizenship.<br>
+    <a href="{{ url_for('appointment') }}" class="btn">Make appointment</a></p>
+  </div>
   
 </div>
 
-</div>
 </div>
 {% endblock %}
