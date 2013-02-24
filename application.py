@@ -229,7 +229,8 @@ def register_user():
 
 def new_user_text(number):
     text = "Thanks for registering with single-stop. We're here to help you succeed. Want to receive periodic text updates? Reply yes or no."
-    sendMessage(number,text)
+    #sendMessage(number,text)
+    sendMessage("+19857188538",text)
 
 def reminder(number):
     text = "hi"
