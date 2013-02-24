@@ -67,6 +67,9 @@ def index():
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+    if session.get("logged_in"):
+        return redirect(url_for('student'))
+
     # TODO: error messages
 
     if request.method == 'POST':
@@ -109,15 +112,19 @@ def forms():
 
 @app.route('/register')
 def register():
+    if session.get("logged_in"):
+        return redirect(url_for('student'))
+
     return render_template('register.html')
 
+'''
 import subprocess
 @app.route('/add_event')
 def add_event():
     subprocess.call("php script.php")
 
     return "Success!"
-
+'''
 
 #-------------------------------------------------------------------------------
 # SMS Notifications API (via Twilio)
@@ -142,8 +149,11 @@ def hello_monkey():
 # Database Changes
 #-------------------------------------------------------------------------------
 
+# can be included in register (potentially)
 @app.route('/register_user', methods = ['POST'])
 def register_user():
+
+    #TODO: validate input, if not valid, redirect to register page
 
     user = User(request.form['username'], request.form['email'], request.form['password'], "")
     db.session.add(user)
