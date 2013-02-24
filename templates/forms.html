@@ -1,19 +1,22 @@
 {% extends "layout.html" %}
 {% block body %}
-  <div class="span12 offset1">
-  
-<div class="navbar">
-  <div class="navbar-inner">
+<div class="span12 offset1">
+  <div class="navbar">
+    <div class="navbar-inner">
     <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
     <ul class="nav">
-    <li><a href="{{ url_for('student') }}">Home</a></li>
+      <li><a href="{{ url_for('student') }}">Home</a></li>
       <li class="active"><a href="{{ url_for('forms') }}">Forms</a></li>
-      <li><a href="#">Appointments</a></li>
+      <li><a href="{{ url_for('counseling') }}">CounselingU</a></li>
+      <li><a href="{{ url_for('appointment') }}">Appointments</a></li>
       <li><a href="{{ url_for('help') }}">Get Help</a></li>
       <li><a href="{{ url_for('logout') }}">Logout</a></li>
     </ul>
+    </div>
   </div>
 </div>
+
+
 
 <div class="hero-unit">
 <h2>Forms to complete</h2>
