@@ -56,8 +56,9 @@ class User(db.Model):
     wants_texts = db.Column(db.String(10))
     major = db.Column(db.String(25))
     graduation_year = db.Column(db.String(4))
+    school = db.Column(db.String(25))
 
-    def __init__(self, username, email, password, phone_number, major = "", graduation_year = ""):
+    def __init__(self, username, email, password, phone_number, major = "", graduation_year = "", school = ""):
 
         # TODO: figure out how to validate input
 
@@ -68,6 +69,7 @@ class User(db.Model):
         self.wants_texts = 'maybe'
         self.major = major
         self.graduation_year = graduation_year
+        self.school = school
 
     def __repr__(self):
         return '<User {0}, Email {1}, Password {2}>'.format(self.username, self.email, self.password)
@@ -205,11 +207,11 @@ def sendMessage(number,text):
 def hello_monkey():
     from_number = request.values.get('From')
     response = request.values.get('Body')
-    user = User.query.filter_by(phone_number=from_number, username="sal").first()
+    user = User.query.filter_by(phone_number=from_number).first()
     message = "we didn't recognize that response, but we're here to help you!"
     if user is not None and user.wants_texts == 'maybe':
         if response == 'yes':
-            message = "thanks, you surely wont regret this!"
+            message = "thanks, you surely wont regret this! we'll text you soon!"
             user.wants_texts = response
             db.session().commit()
         elif response == 'no':
