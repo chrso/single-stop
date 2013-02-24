@@ -1,3 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="span12 offset1">
+	
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+	    <ul class="nav">
+	    </ul>
+	  </div>
+	</div>
+
 <h2>Login</h2>
 
 <form action="{{ url_for('login') }}" method=post>
@@ -9,3 +22,7 @@
         <dd><input type=submit value=Login>
     </dl>
 </form>
+
+</div>
+
+{% endblock %}

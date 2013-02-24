@@ -42,7 +42,7 @@ class User(db.Model):
     username = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(120), unique=True)
     password = db.Column(db.String(25), unique=True)
-    phone_number = db.Column(db.String(20), unique=True)
+    phone_number = db.Column(db.String(20))
 
     def __init__(self, username, email, password, phone_number):
 
@@ -79,40 +79,49 @@ def login():
 
     return render_template('login.html')
 
-@app.route('/my_student', methods = ['GET'])
-def my_student():
-    if not session.get('logged_in'):
-        return redirect(url_for('login'))
-    
-    # TODO: render student template
-    return 'Student Page.'
-
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
 
     return redirect(url_for('login'))
 
+@app.route('/student')
 @app.route('/student/home')
 def student():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
     return render_template('student.html')
 
 @app.route('/student/help')
 def help():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
     return render_template('help.html')
 
 @app.route('/student/forms')
 def forms():
+    if not session.get("logged_in"):
+        return redirect(url_for('login'))
+
     return render_template('forms.html')
 
 @app.route('/register')
 def register():
     return render_template('register.html')
 
+import subprocess
+@app.route('/add_event')
+def add_event():
+    subprocess.call("php script.php")
 
-#
-# SMS
-#
+    return "Success!"
+
+
+#-------------------------------------------------------------------------------
+# SMS Notifications API (via Twilio)
+#-------------------------------------------------------------------------------
 
 @app.route('/SMSBlast')
 def sendMessage():
@@ -134,13 +143,17 @@ def hello_monkey():
 #-------------------------------------------------------------------------------
 
 @app.route('/register_user', methods = ['POST'])
-def add_user():
+def register_user():
 
-    user = User(request.form['username'], request.form['email'], request.form['password'])
+    user = User(request.form['username'], request.form['email'], request.form['password'], "")
     db.session.add(user)
     db.session.commit()
 
     return redirect(url_for('student'))
+
+#-------------------------------------------------------------------------------
+# Launcher
+#-------------------------------------------------------------------------------
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

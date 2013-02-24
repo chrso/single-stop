@@ -1,20 +1,32 @@
 {% extends "layout.html" %}
 {% block body %}
-  <div class="span4">
-  <br><br>
-	<h2>You may be eligible for $50,000</h2>
-    <b>Please register to find out how</b><br><br>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <form class="navbar-form pull-left">
-  		<input type="text" class="span2" placeholder="Username"><br>
-		<input type="text" class="span2" placeholder="Password"><br>
-		<input type="text" class="span2" placeholder="Verify Password"><br><br>
+
+<div class="span12 offset1">
+
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+	    <ul class="nav">
+	    </ul>
+	  </div>
+	</div>
+
+	  <div class="span4">
+	  <br><br>
+		<h2>You may be eligible for $50,000</h2>
+	    <b>Please register to find out how</b><br><br>
+	    <script src="http://code.jquery.com/jquery.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
+	    <form class="navbar-form pull-left" action="{{ url_for('register_user') }}" method=post>
+	  		<input type="text" class="span2" placeholder="Username" name="username"><br>
+			<input type="password" class="span2" placeholder="Password" name="password"><br>
+			<input type="password" class="span2" placeholder="Verify Password"><br>
+	        <input type="text" class="span2" placeholder="Email Address" name="email"><br><br>
 
 		
-  <button type="submit" class="btn">Login</button>
-  </div>
-
-  </div>
-</form>
+	    <button type="submit" class="btn">Login</button>
+	    </form>
+	  </div>
+	
+</div>
 {% endblock %}
