@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    </style>
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDZ7pRMhpfmrMGBwEuzgH8GQkkbssDKRZE&sensor=true">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng(-34.397, 150.644),
+          zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+		
+		
+		geocoder = new google.maps.Geocoder();
+    var loc = {{ locations|tojson|safe }}; //logined student's address
+	
+	var addr = ["199 Chambers Street Room S235",
+		"Bronx Community College Loew Hall, Room 123",
+		"Bunker Hill Community College",
+		"College of Marin",
+		"Contra Costa Community College",
+		"Delgado Comminity College",
+		"Essex County College",
+		"Hostos Community College (CUNY)",
+		"Kingsborough Community College (CUNY)",
+		"LaGuardia Community College (CUNY)",
+		"Miami Dade College – North, Wolfson, and Kendall campuses",
+		"Queensborough Community College (CUNY)",
+		"Westchester Community College"
+	];
+	var univ = ["Borough of Manhattan Community College (CUNY)",
+		"Bronx Community College (CUNY)",
+		"Bunker Hill Community College",
+		"College of Marin",
+		"Contra Costa Community College",
+		"Delgado Comminity College",
+		"Essex County College",
+		"Hostos Community College (CUNY)",
+		"Kingsborough Community College (CUNY)",
+		"LaGuardia Community College (CUNY)",
+		"Miami Dade College – North, Wolfson, and Kendall campuses",
+		"Queensborough Community College (CUNY)",
+		"Westchester Community College"
+	];
+	var phone = ["(212) 220-8195",
+				"(718) 289-5100 ext. 3433 or 5179",
+				"(617) 228-3330",
+				"(415) 457-8811",
+				"(510) 235-7800",
+				"CALL 671-6563",
+				"(973) 877-1856",
+				"(718) 319-7981",
+				"(718) 368-5411",
+				"(718) 482-5135",
+				"(305) 237-0712 ",
+				"(718) 631-6347",
+				"(914) 606-6725"				
+	];
+	var n = 13;
+    for (var i = 0; i < n; i++) {
+  		geocoder.geocode( { 'address': addr[i] }, function(results, status) {
+  		  if (status == google.maps.GeocoderStatus.OK) {			
+  			var mark = new google.maps.Marker({
+  				map: map,
+  				position: results[0].geometry.location,
+				title: univ[i]
+  			});
+  		  } else {
+  			alert("Geocode was not successful for the following reason: " + status);
+  		  }
+  		});
+	}
+		
+		var myLatlng = new google.maps.LatLng(-34.397, 150.644);
+		var marker = new google.maps.Marker({
+			  position: myLatlng,
+			  map: map,
+			  title:"Hello World!"
+		 });
+      }
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas" style="width:50%; height:100%"></div>
+  </body>
+</html>
