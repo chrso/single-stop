@@ -128,6 +128,7 @@ def login():
         if user is not None:
         # Later: check passwords
             session['logged_in'] = True
+            session['username'] = user.username
             return redirect(url_for('student'))
 
     return render_template('login.html')
@@ -240,6 +241,7 @@ def register_user():
     new_user_text(user.phone_number)
 
     session['logged_in'] = True 
+    session['username'] = user.username
 
     return redirect(url_for('student'))
 
