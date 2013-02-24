@@ -26,8 +26,9 @@
         console.log(i);
         if (opened==true)
         {
-          window.open('http://singlestop.herokuapp.com/response');
+          $('#myModal').modal('show')
           i++;
+          opened=false;
         }
       }
     </script>
