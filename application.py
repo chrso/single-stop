@@ -27,6 +27,11 @@ db = SQLAlchemy(app)
 # migrate database -- doesn't overwrite tables
 db.create_all()
 
+# stuff need by twillio to send messages
+account_sid = "AC529852db190279bf7ed541ae7340fd4a"
+auth_token = "8953ef895b2a097f71a4e3e7937ced28"
+client = TwilioRestClient(account_sid,auth_token);
+
 #-------------------------------------------------------------------------------
 # Models
 #-------------------------------------------------------------------------------
@@ -109,8 +114,16 @@ def register():
 # SMS
 #
 
+@app.route('/SMSBlast')
+def sendMessage():
+    message = client.sms.messages.create(body="Jenny please?! i love u",
+      to="+19857188538",
+      from_="+19857180534")
+    print message.sid
+
 @app.route('/SMSResponse', methods=['GET', 'POST'])
 def hello_monkey():
+    from_number = request.values.get('From')
     resp = twilio.twiml.Response()
     resp.sms("Hello, Mobile DOG!!!")
     return str(resp)
