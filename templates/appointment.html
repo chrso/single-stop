@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block body %}
+<body>
+  
+<div class="span12 offset1">
+  <div class="navbar">
+	  <div class="navbar-inner">
+	    <a class="brand" href="{{ url_for('index') }}">Your Single Stop</a>
+	    <ul class="nav">
+	    <li><a href="{{ url_for('student') }}">Home</a></li>
+	      <li><a href="{{ url_for('forms') }}">Forms</a></li>
+	      <li class="active"><a href="{{ url_for('appointment') }}">Appointments</a></li>
+	      <li><a href="{{ url_for('help') }}">Get Help</a></li>
+          <li><a href="{{ url_for('logout') }}">Logout</a></li>
+	    </ul>
+	  </div>
+	</div>
+</div>
+
+<div class="hero-unit">
+  <h2 style="text-align:center">Make an appointment</h2>
+<iframe src="http://singlestoptester.youcanbook.me/?noframe=true&skipHeaderFooter=true" style="width:100%;height:2000px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true" onload="if((document.documentElement&&document.documentElement.scrollTop)||document.body.scrollTop>this.offsetTop)this.scrollIntoView();"></iframe>
+  
+</div>
+
+      <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </div>
+  </body>
+{% endblock %}

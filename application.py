@@ -41,7 +41,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(25), unique=True)
+    password = db.Column(db.String(25))
     phone_number = db.Column(db.String(20))
 
     def __init__(self, username, email, password, phone_number):
@@ -158,8 +158,10 @@ def register_user():
     user = User(request.form['username'], request.form['email'], request.form['password'], request.form['number'])
     db.session.add(user)
     db.session.commit()
-    num = user.phone_number
     new_user_text(user.phone_number)
+
+    session['logged_in'] = True 
+
     return redirect(url_for('student'))
 
 def new_user_text(number):
