@@ -17,32 +17,71 @@
     </ul>
     </div>
   </div>
+  
+	<div class="row" onmouseover="myFunction3();">
 
-	<div class="hero-unit">
-		<h2>More ways to save</h2>
-		<div class="well">
-		  <p><b>Scholarship A</b><br>
-		  Information</p>
-    </div>
-  	<div class="well">
-  		<p><b>Coupon B</b><br>
-  		Save at the bookstore with code ABCDE</p>
-    </div>
-    <div class="well">
-      <p><b>We're here to help!</b> Help us help you- share what we do with your friends.<br>
-      <!-- AddThis Button BEGIN -->
-      <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-      <a class="addthis_button_preferred_1"></a>
-      <a class="addthis_button_preferred_2"></a>
-      <a class="addthis_button_preferred_3"></a>
-      <a class="addthis_button_preferred_4"></a>
-      <a class="addthis_button_compact"></a>
-      <a class="addthis_counter addthis_bubble_style"></a>
+    <div class="span7">
+      <h2>Forms to complete</h2>
+
+      <div class="well">
+        <p><b>Form A</b> - potentially $A<br>
+        Form is available at Fafsa.<br>
+        <button onclick="myFunction()" class="btn">Go to form</button><br>
+        Due by 2/30/2013 </p>
       </div>
-      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-512a1d326978b939"></script>
-      <!-- AddThis Button END -->
+      <div class="well">
+        <p><b>Form B</b> - potentially $X<br>
+        Form is not available online. We can help you file the proper paperwork in the office.<br>
+        You can visit us at Bronx Community College.<br>
+        <a href="{{ url_for('appointment') }}" class="btn">Make appointment</a><br>
+        Due by 3/2/2013</p>
+      </div>
     </div>
-	</div>
+
+    <div class="span5">
+  		<h2>More ways to save</h2>
+  		<div class="well">
+  		  <p><b>Scholarship A</b><br>
+  		  Information</p>
+      </div>
+    	<div class="well">
+    		<p><b>Coupon B</b><br>
+    		Save at the bookstore with code ABCDE</p>
+      </div>
+      <div class="well">
+        <p><b>We're here to help!</b> Help us help you--share what we do with your friends.<br>
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+        <a class="addthis_button_preferred_1"></a>
+        <a class="addthis_button_preferred_2"></a>
+        <a class="addthis_button_preferred_3"></a>
+        <a class="addthis_button_preferred_4"></a>
+        <a class="addthis_button_compact"></a>
+        <a class="addthis_counter addthis_bubble_style"></a>
+        </div>
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-512a1d326978b939"></script>
+        <!-- AddThis Button END -->
+      </div>
+    </div>
+
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">How did it go?</h3> Did you submit?
+      </div>
+      <div class="modal-body">
+        <p><form name="formFoo">
+        <input type="radio" name="groupFoo" value="yes"> Yes<br>
+        <input type="radio" name="groupFoo" value="no"> No
+        </form>
+        <textarea rows="5" class="span4" placeholder="Type your questions or comments below and they will be emailed to your local representative."></textarea></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button onClick="setReminder()" type="submit" class="btn" data-dismiss="modal" aria-hidden="true">Submit</button>
+      </div>
+    </div>
+  </div>
 
 </div>
 </div>
